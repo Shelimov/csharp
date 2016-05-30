@@ -35,17 +35,25 @@ namespace Lab7
                 return "Error";
             }
         }
+        private char getLastChar()
+        {
+            return textBox1.Text[textBox1.Text.Length - 1];
+        }
         private bool isLastArithmetic()
         {
-            return "+-*/".IndexOf(textBox1.Text[textBox1.Text.Length - 1]) != -1;
+            return "+-*/".IndexOf(getLastChar()) != -1;
         }
         private bool isLastSeperator()
         {
-            return textBox1.Text[textBox1.Text.Length - 1] == ',';
+            return getLastChar() == ',';
         }
         private bool isEmpty()
         {
             return textBox1.Text == "0";
+        }
+        private bool isLastDigit()
+        {
+            return Char.IsDigit(getLastChar());
         }
         private void Button_Click(object sender, EventArgs e)
         {
@@ -60,6 +68,9 @@ namespace Lab7
             }
             else if ("()".IndexOf(chr) != -1)
             {
+                if (isLastSeperator())
+                    return;
+
                 if (isEmpty())
                     textBox1.Text = chr.ToString();
                 else
